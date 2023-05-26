@@ -12,7 +12,7 @@ const navs = [
   {
     id: 2,
     label: "Sign in",
-    href: "/sign-in",
+    href: "/auth",
   },
 ];
 const Navigation = () => {

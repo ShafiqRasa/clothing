@@ -6,6 +6,8 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 // in order to use another firebase service(firestore), you need to import the required methods
@@ -32,12 +34,11 @@ export const auth = new getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
-export const createUserDocumentFromAuth = async ({
-  displayName,
-  email,
-  uid,
-}) => {
-  console.log(displayName);
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInfo = {}
+) => {
+  const { uid, displayName, email } = userAuth;
   const userDocRef = doc(db, "users", uid);
   const userDocSnappShot = await getDoc(userDocRef);
   if (!userDocSnappShot.exists()) {
@@ -47,10 +48,21 @@ export const createUserDocumentFromAuth = async ({
         displayName,
         email,
         createdAt,
+        ...additionalInfo,
       });
     } catch (error) {
       console.log("error while creating user to the database", error);
     }
   }
   return userDocRef;
+};
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password);
 };
