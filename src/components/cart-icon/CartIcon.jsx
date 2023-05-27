@@ -9,8 +9,8 @@ const CartIcon = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="cart-icon-container">
-      <ShoppingIcon className="shopping-icon" onClick={handleShopping} />
+    <div className="cart-icon-container" onClick={handleShopping}>
+      <ShoppingIcon className="shopping-icon" />
       <span className="item-count">{cartCount}</span>
     </div>
   );
