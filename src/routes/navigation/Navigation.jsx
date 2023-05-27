@@ -6,7 +6,7 @@ import { UserContext } from "../../contexts/user";
 import { userSignOut } from "../../utils/firebase/firebase-api.config";
 import CartIcon from "../../components/cart-icon";
 import CartDropdown from "../../components/cart-dropdown";
-import { CheckoutContext } from "../../contexts/checkout";
+import { CartContext } from "../../contexts/cart";
 
 const navs = [
   {
@@ -22,7 +22,7 @@ const navs = [
 ];
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  const { isOpen } = useContext(CheckoutContext);
+  const { isOpen } = useContext(CartContext);
   const handleUserSignOut = async () => {
     await userSignOut();
   };
