@@ -10,8 +10,8 @@ export const UserContext = createContext({
   setCurrentUser: () => null,
 });
 
-// ContextProvider is the actual component, which provides the context's values for the childrens
-export const ContextProvider = ({ children }) => {
+// UserProvider is the actual component, which provides the context's values for the childrens
+export const UserProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListner((user) => {
       user && createUserDocumentFromAuth(user);
