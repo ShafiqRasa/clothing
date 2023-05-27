@@ -13,7 +13,7 @@ const CartDropdown = () => {
           <CartItem key={id} {...item} />
         ))}
       </div>
-      <Button>Go to checkout</Button>
+      <Button>Go To Checkout</Button>
     </div>
   );
 };
