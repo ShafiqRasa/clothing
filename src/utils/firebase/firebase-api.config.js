@@ -90,8 +90,11 @@ export const userSignOut = async () => signOut(auth);
  * in order to treger signing in and signing out of the user effeciently.
  * Firebase provides a really helpful listner to keep traking of user authenitcation called OBSERVER PATTERN(onAuthStateChanged!)
  **/
-export const onAuthStateChangedListner = (callback) =>
-  onAuthStateChanged(auth, callback, errorCallback, completeCallback);
+export const onAuthStateChangedListner = (
+  callback,
+  errorCallback,
+  completeCallback
+) => onAuthStateChanged(auth, callback, errorCallback, completeCallback);
 
 /**
  * OBSERVER PATTERN callbacks, we can track based on especific callback and do the right thing,
