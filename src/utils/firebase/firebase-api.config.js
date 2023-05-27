@@ -9,6 +9,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 // in order to use another firebase service(firestore), you need to import the required methods
@@ -26,8 +27,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
-/* 1. create provider and auth,
- to pass to the signInWithPopup firestore service to do user authentication using google account */
+/**
+ * 1. create provider and auth, to pass to the signInWithPopup firestore service to do user authentication using google account
+ **/
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
   prompt: "select_account",
@@ -37,11 +39,11 @@ export const auth = new getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 /************ End ***************/
 
-/* 2. using getFirestore, actually we pointting to the database which we have just created inside firestore!
-      and geting the userDocRef from the doc and pass it to the getDoc to get access to the userSnappShotDocRef
-      after checking if the authenticated user is exsit in our database or not,
-      if not, store the user to the database using setDoc
-*/
+/**
+ * 2. using getFirestore, actually we pointting to the database which we have just created inside firestore!
+ * after checking if the authenticated user is exsit in our database or not,
+ * if not, store the user to the database using setDoc
+ *  */
 export const db = getFirestore();
 export const createUserDocumentFromAuth = async (
   userAuth,
@@ -82,3 +84,21 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 /************ End ***************/
 
 export const userSignOut = async () => signOut(auth);
+
+/**
+ * onAuthStateChanged is one more important and effecient service which firebase provided for us,
+ * in order to treger signing in and signing out of the user effeciently.
+ * Firebase provides a really helpful listner to keep traking of user authenitcation called OBSERVER PATTERN(onAuthStateChanged!)
+ **/
+export const onAuthStateChangedListner = (callback) =>
+  onAuthStateChanged(auth, callback, errorCallback, completeCallback);
+
+/**
+ * OBSERVER PATTERN callbacks, we can track based on especific callback and do the right thing,
+ * in order to prvide professional user experience.
+ *
+ * 1. next: callback
+ * 2. error: errorCallback
+ * 3. complete: completeCallback
+ */
+/************ End ***************/

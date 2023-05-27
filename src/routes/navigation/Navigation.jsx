@@ -18,10 +18,9 @@ const navs = [
   },
 ];
 const Navigation = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const handleUserSignOut = async () => {
     await userSignOut();
-    setCurrentUser(null);
   };
   return (
     <Fragment>
