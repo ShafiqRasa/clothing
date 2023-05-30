@@ -13,7 +13,16 @@ import {
 } from "firebase/auth";
 
 // in order to use another firebase service(firestore), you need to import the required methods
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  getDocs,
+  query,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDYJ5SgQ5wgQw8BumqT-Ie6x1il01wf0B8",
@@ -104,4 +113,41 @@ export const onAuthStateChangedListner = (
  * 2. error: errorCallback
  * 3. complete: completeCallback
  */
+/************ End ***************/
+
+/**
+ *
+ * @param {*} collectionKey is the name of callection which is gonna suppose to write inside
+ * @param {*} data is the data suppose to be stored to that collection
+ */
+export const writeDataToDB = async (collectionKey, data, field) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  data.forEach((item) => {
+    const docRef = doc(collectionRef, item[field].title.toLowerCase());
+    batch.set(docRef, item);
+  });
+  await batch.commit();
+  console.log("data has been uploaded successfully!");
+};
+/************ End ***************/
+
+/**
+ *
+ * @param {*} collectionKey is the specific collectionName which we want to fetch data from.
+ * @returns
+ */
+export const getDataFromDB = async (collectionKey) => {
+  const collectionRef = collection(db, collectionKey); // point out to the collection
+  const q = query(collectionRef); // with the collectionRef, now have access to the query instance
+
+  const querySnapshot = await getDocs(q); // with the query instance, now have access to the querySnapshot using getDocs method
+  const data = querySnapshot.docs.reduce((accumelator, currentItem) => {
+    const { title, items } = currentItem.data();
+    accumelator[title.toLowerCase()] = items;
+    return accumelator;
+  }, {});
+  return data;
+};
 /************ End ***************/

@@ -1,10 +1,10 @@
 import React from "react";
-import Item from "../category-item";
+import Item from "../directory-item";
 import "./categories-list.style.scss";
 
 const Categories = ({ categories }) => {
   return (
-    <div className=" categories-container">
+    <div className="categories-list-container">
       {categories.map((category) => (
         <Item key={category.id} {...category} />
       ))}
