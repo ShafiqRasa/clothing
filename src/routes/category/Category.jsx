@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect, Fragment } from "react";
 import { useParams } from "react-router-dom";
-import "./category.style.scss";
+import { CategoryContainer, CategoryTitle } from "./category.style";
 import { CategoriesContext } from "../../contexts/categories";
 import Product from "../../components/product";
 
@@ -14,13 +14,13 @@ const Category = () => {
 
   return (
     <Fragment>
-      <h2 className="category-title">{category.toUpperCase()}</h2>
-      <div className="category-conainer">
+      <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
+      <CategoryContainer>
         {products &&
           products.map((product) => (
             <Product key={product.is} product={product} />
           ))}
-      </div>
+      </CategoryContainer>
     </Fragment>
   );
 };

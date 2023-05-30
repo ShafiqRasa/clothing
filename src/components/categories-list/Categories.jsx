@@ -1,14 +1,14 @@
 import React from "react";
 import Item from "../directory-item";
-import "./categories-list.style.scss";
+import { CategoriesListContainer } from "./categories-list.style";
 
 const Categories = ({ categories }) => {
   return (
-    <div className="categories-list-container">
+    <CategoriesListContainer>
       {categories.map((category) => (
         <Item key={category.id} {...category} />
       ))}
-    </div>
+    </CategoriesListContainer>
   );
 };
 
