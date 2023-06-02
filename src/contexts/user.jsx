@@ -20,6 +20,11 @@ export const UserProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
+  /**
+   * instead of using useState in ContextAPI,
+   * for best practic you can use useReducer
+   * and also it is match more preferable
+   *  */
   const [currentUser, setCurrentUser] = useState(null);
   const value = { currentUser, setCurrentUser };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
