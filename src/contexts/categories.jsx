@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer } from "react";
 import { getDataFromDB } from "../utils/firebase/firebase-api.config";
+import { CreatAction } from "../utils/reducer";
 const CATEGORIES_ACTION_TYPES = {
   SET_CATEGORIES: "SET_CATEGORIES",
 };
@@ -24,10 +25,7 @@ export const CategoriesProvider = ({ children }) => {
   const value = { categories };
 
   const setCategories = (categories) =>
-    dispatch({
-      type: CATEGORIES_ACTION_TYPES.SET_CATEGORIES,
-      payload: categories,
-    });
+    dispatch(CreatAction(CATEGORIES_ACTION_TYPES.SET_CATEGORIES, categories));
 
   useEffect(() => {
     const getData = async () => {

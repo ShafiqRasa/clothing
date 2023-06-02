@@ -1,4 +1,5 @@
 import { createContext, useEffect, useReducer } from "react";
+import { CreatAction } from "../utils/reducer";
 import {
   onAuthStateChangedListner,
   createUserDocumentFromAuth,
@@ -28,7 +29,7 @@ const userReducer = (state, action) => {
 // UserProvider is the actual component, which provides the context's values for the childrens
 export const UserProvider = ({ children }) => {
   const setCurrentUser = (user) => {
-    dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user });
+    dispatch(CreatAction(USER_ACTION_TYPES.SET_CURRENT_USER, user));
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListner((user) => {
