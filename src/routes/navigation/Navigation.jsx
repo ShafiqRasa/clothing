@@ -6,6 +6,7 @@ import CartIcon from "../../components/cart-icon";
 import CartDropdown from "../../components/cart-dropdown";
 import { CartContext } from "../../contexts/cart";
 import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user-selector";
 import {
   NavigationContainer,
   LogoConainer,
@@ -13,20 +14,20 @@ import {
   NavLink,
 } from "./navigation.styles";
 
-const navs = [
-  {
-    id: 1,
-    label: "Shop",
-    href: "/shop",
-  },
-  {
-    id: 2,
-    label: "Sign in",
-    href: "/auth",
-  },
-];
+// const navs = [
+//   {
+//     id: 1,
+//     label: "Shop",
+//     href: "/shop",
+//   },
+//   {
+//     id: 2,
+//     label: "Sign in",
+//     href: "/auth",
+//   },
+// ];
 const Navigation = () => {
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const currentUser = useSelector(selectCurrentUser);
   const { isOpen } = useContext(CartContext);
   const handleUserSignOut = async () => {
     await userSignOut();

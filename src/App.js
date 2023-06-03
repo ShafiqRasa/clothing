@@ -9,9 +9,11 @@ import Checkout from "./routes/checkout";
 import {
   onAuthStateChangedListner,
   createUserDocumentFromAuth,
+  getDataFromDB,
 } from "./utils/firebase/firebase-api.config";
 import { setCurrentUser } from "./store/user/actions";
 import { useDispatch } from "react-redux";
+import { setCategories } from "./store/categories/actions";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +23,13 @@ const App = () => {
       dispatch(setCurrentUser(user));
     });
     return unsubscribe;
+  }, []);
+  useEffect(() => {
+    const getData = async () => {
+      const categories = await getDataFromDB("categories");
+      dispatch(setCategories(categories));
+    };
+    return getData;
   }, []);
   return (
     <Routes>
