@@ -143,11 +143,6 @@ export const getDataFromDB = async (collectionKey) => {
   const q = query(collectionRef); // with the collectionRef, now have access to the query instance
 
   const querySnapshot = await getDocs(q); // with the query instance, now have access to the querySnapshot using getDocs method
-  const data = querySnapshot.docs.reduce((accumelator, currentItem) => {
-    const { title, items } = currentItem.data();
-    accumelator[title.toLowerCase()] = items;
-    return accumelator;
-  }, {});
-  return data;
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
 /************ End ***************/
