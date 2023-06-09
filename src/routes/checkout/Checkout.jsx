@@ -1,6 +1,6 @@
 import CheckoutItem from "../../components/checkout-item/CheckoutItem";
 import { useSelector } from "react-redux";
-import { cartSelector } from "../../store/cart/cart-selector";
+import { cartSelector, newTotalPrice } from "../../store/cart/cart-selector";
 import {
   CheckoutContainer,
   CheckoutHeader,
@@ -9,7 +9,8 @@ import {
 } from "./checkout.style";
 
 const Checkout = () => {
-  const { cartItems, totalPrice } = useSelector(cartSelector);
+  const { cartItems } = useSelector(cartSelector);
+  const totalPrice = useSelector(newTotalPrice);
   return (
     <CheckoutContainer>
       <CheckoutHeader>
