@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { ReactComponent as CrownLogo } from "../../assets/icons/crown.svg";
 import { userSignOut } from "../../utils/firebase/firebase-api.config";
-import CartIcon from "../../components/cart-icon";
+import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown";
 import { useSelector } from "react-redux";
 import { cartSelector } from "../../store/cart/cart-selector";

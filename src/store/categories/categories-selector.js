@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+/** using createSelector from reselect library we are gonna add memoization(catching) to our redux */
 /**
  * reducer method is going to goes through single item inside of an array,
  * and manipulate it according to our wishes
