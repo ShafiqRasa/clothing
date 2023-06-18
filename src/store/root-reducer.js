@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { userReducer } from "./user/reducer";
-import { categoriesReducer } from "./categories/reducer";
+import { categoriesReducer } from "./categories/category-reducer";
 import { cartReducer } from "./cart/reducer";
 
 /** root reducer is gonna combine all reducers in single place using combineReducer method from redux */

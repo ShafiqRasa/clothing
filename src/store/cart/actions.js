@@ -1,7 +1,7 @@
 import { CART_ACTION_TYPES } from "./types";
-import { CreatAction } from "../../utils/reducer";
+import { CreateAction } from "../../utils/reducer";
 
-export const setIsOpen = () => CreatAction(CART_ACTION_TYPES.SET_IS_OPEN);
+export const setIsOpen = () => CreateAction(CART_ACTION_TYPES.SET_IS_OPEN);
 
 const newCartCount = (cartItems) => {
   return cartItems.reduce(
@@ -26,7 +26,7 @@ const updateCartItemReducer = (cartItems) => {
     totalPrice,
   };
 
-  return CreatAction(CART_ACTION_TYPES.SET_CART_ITEM, payload);
+  return CreateAction(CART_ACTION_TYPES.SET_CART_ITEM, payload);
 };
 const addItem = (cartItems, productToAdd) => {
   // find if cartItems contains productToAdd
