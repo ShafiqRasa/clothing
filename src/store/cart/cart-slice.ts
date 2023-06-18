@@ -1,13 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { itemType } from "../categories/categories-slice";
 
-const INITIAL_STATE = {
+export type cartItemType = itemType & {
+  quantity: number;
+};
+type initialStateType = {
+  cartItems: cartItemType[];
+  cartCount: Number;
+  totalPrice: Number;
+  isOpen: Boolean;
+};
+const initialState: initialStateType = {
   cartItems: [],
   cartCount: 0,
   totalPrice: 0,
   isOpen: false,
 };
 
-const addItem = (cartItems, productToAdd) => {
+const addItem = (cartItems: cartItemType[], productToAdd: cartItemType) => {
   // find if cartItems contains productToAdd
   const itemExist = cartItems.find((item) => item.id == productToAdd.id);
 
@@ -26,13 +36,19 @@ const addItem = (cartItems, productToAdd) => {
   return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
 
-const removeItem = (cartItems, cartItemToRemove) => {
+const removeItem = (
+  cartItems: cartItemType[],
+  cartItemToRemove: cartItemType
+) => {
   // find if cartItems contains cartItemToRemove
   const itemExist = cartItems.find((item) => item.id == cartItemToRemove.id);
 
   // check if quantity is equal to 1, then remove that item from the cart
-  if (itemExist.quantity == 1)
-    return cartItems.filter((cartItem) => cartItem.id != cartItemToRemove.id);
+  if (itemExist) {
+    if (itemExist.quantity == 1) {
+      return cartItems.filter((cartItem) => cartItem.id != cartItemToRemove.id);
+    }
+  }
 
   // return back the cartItem with the reduced quantity
   return cartItems.map((cartItem) =>
@@ -45,23 +61,25 @@ const removeItem = (cartItems, cartItemToRemove) => {
   );
 };
 
-const directRemoveItem = (cartItems, cartItemToRemove) =>
-  cartItems.filter((cartItem) => cartItem.id != cartItemToRemove.id);
+const directRemoveItem = (
+  cartItems: cartItemType[],
+  cartItemToRemove: cartItemType
+) => cartItems.filter((cartItem) => cartItem.id != cartItemToRemove.id);
 
 export const cartSlice = createSlice({
   name: "cart",
-  initialState: INITIAL_STATE,
+  initialState,
   reducers: {
     setIsOpen(state) {
       state.isOpen = !state.isOpen;
     },
-    addItemToCart(state, action) {
+    addItemToCart(state, action: PayloadAction<cartItemType>) {
       state.cartItems = addItem(state.cartItems, action.payload);
     },
-    removeItemFromCart(state, action) {
+    removeItemFromCart(state, action: PayloadAction<cartItemType>) {
       state.cartItems = removeItem(state.cartItems, action.payload);
     },
-    directRemoveItemFromCart(state, action) {
+    directRemoveItemFromCart(state, action: PayloadAction<cartItemType>) {
       state.cartItems = directRemoveItem(state.cartItems, action.payload);
     },
   },
@@ -75,16 +93,3 @@ export const {
 } = cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;
-
-// (state = INITIAL_STATE, action) => {
-//   const { type, payload } = action;
-
-//   switch (type) {
-//     case CART_ACTION_TYPES.SET_CART_ITEM:
-//       return { ...state, ...payload };
-//     case CART_ACTION_TYPES.SET_IS_OPEN:
-//       return { ...state, isOpen: !state.isOpen };
-//     default:
-//       return state;
-//   }
-// };

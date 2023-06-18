@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import CategoryPreview from "../category-preview";
 import { useSelector } from "react-redux";
 import { categoriesSelector } from "../../store/categories/categories-selector";
