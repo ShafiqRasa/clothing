@@ -18,7 +18,6 @@ export const categoriesSelector = createSelector(
   [selectCategories],
   (categories): CategoryMap =>
     categories.reduce((accumelator, category) => {
-      console.log(accumelator, category);
       const { title, items } = category;
       accumelator[title.toLowerCase()] = items;
       return accumelator;
