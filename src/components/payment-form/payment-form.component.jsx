@@ -7,6 +7,7 @@ const PaymentForm = () => {
   const elements = useElements();
   const handlePayment = async (event) => {
     event.preventDefault();
+    if (!stripe || !elements) return;
   };
   return (
     <PaymentFormContainer>
