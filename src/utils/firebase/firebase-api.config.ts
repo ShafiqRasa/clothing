@@ -60,7 +60,7 @@ export type additionalInfoType = {
   displayName?: string;
 };
 export type userType = {
-  createdAt: Date;
+  password: string;
   displayName: string;
   email: string;
 };

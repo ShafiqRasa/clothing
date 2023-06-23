@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "downlevelIteration": true, // to write saga in typescript it should be added
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

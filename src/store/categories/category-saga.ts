@@ -1,4 +1,4 @@
-import { all, call, put, takeLatest } from "redux-saga/effects";
+import { all, call, put, takeLatest } from "typed-redux-saga";
 import { CATEGORIES_ACTION_TYPES } from "./category-types";
 import { getDataFromDB } from "../../utils/firebase/firebase-api.config";
 import {
@@ -8,21 +8,21 @@ import {
 
 export function* fetchCategoriesAsync() {
   try {
-    const categoriesArray = yield call(getDataFromDB, "categories");
+    const categoriesArray = yield* call(getDataFromDB, "categories");
     // in Saga with put actually we're gonna dispatch the action
-    yield put(fetchCategoriesSuccess(categoriesArray));
+    yield* put(fetchCategoriesSuccess(categoriesArray));
   } catch (error) {
-    yield put(fetchCategoriesFailed(error));
+    yield* put(fetchCategoriesFailed(error as Error));
   }
 }
 
 export function* onFetchCateogires() {
-  yield takeLatest(
+  yield* takeLatest(
     CATEGORIES_ACTION_TYPES.SET_CATEGORIES_START,
     fetchCategoriesAsync
   );
 }
 
 export function* categoriesSaga() {
-  yield all([call(onFetchCateogires)]);
+  yield* all([call(onFetchCateogires)]);
 }

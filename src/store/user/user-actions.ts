@@ -1,4 +1,3 @@
-import { StringifyOptions } from "querystring";
 import {
   CreateAction,
   withMatcher,
@@ -10,13 +9,14 @@ import {
   userType,
   additionalInfoType,
 } from "../../utils/firebase/firebase-api.config";
+import { User } from "firebase/auth";
 
 export type SetCurrentUser = ActionWithPayload<
   USER_ACTION_TYPES.SET_CURRENT_USER,
-  userType
+  User
 >;
 export const setCurrentUser = withMatcher(
-  (user: userType): SetCurrentUser =>
+  (user: User): SetCurrentUser =>
     CreateAction(USER_ACTION_TYPES.SET_CURRENT_USER, user)
 );
 
@@ -46,7 +46,7 @@ export type SignInSuccess = ActionWithPayload<
   userType
 >;
 export const signInSuccess = withMatcher(
-  (user: userType): SignInSuccess =>
+  (user: userType & { id: string }): SignInSuccess =>
     CreateAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user)
 );
 
@@ -80,21 +80,21 @@ export const signOutFieled = withMatcher(
     CreateAction(USER_ACTION_TYPES.SIGN_OUT_FAILED, error)
 );
 
-export type SignOutStart = ActionWithPayload<
+export type SignUpStart = ActionWithPayload<
   USER_ACTION_TYPES.SIGN_UP_START,
   userType
 >;
 export const signUpStart = withMatcher(
-  (user: userType): SignOutStart =>
+  (user: userType): SignUpStart =>
     CreateAction(USER_ACTION_TYPES.SIGN_UP_START, user)
 );
 
 export type SignUpSuccess = ActionWithPayload<
   USER_ACTION_TYPES.SIGN_UP_SUCCESS,
-  { user: userType; additionalInfo: additionalInfoType }
+  { user: User; additionalInfo: additionalInfoType }
 >;
 export const signUpSuccess = withMatcher(
-  (user: userType, additionalInfo: additionalInfoType): SignUpSuccess =>
+  (user: User, additionalInfo: additionalInfoType): SignUpSuccess =>
     CreateAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, { user, additionalInfo })
 );
 
