@@ -15,7 +15,7 @@ import {
   addItemToCart,
   removeItemFromCart,
   directRemoveItemFromCart,
-} from "../../store/cart/cat-actions";
+} from "../../store/cart/cart-actions";
 
 const CheckoutItem = ({ cartItem }) => {
   const dispatch = useDispatch();

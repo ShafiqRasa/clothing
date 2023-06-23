@@ -1,7 +1,10 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
-import { CATEGORIES_ACTION_TYPES } from "./types";
+import { CATEGORIES_ACTION_TYPES } from "./category-types";
 import { getDataFromDB } from "../../utils/firebase/firebase-api.config";
-import { fetchCategoriesSuccess, fetchCategoriesFailed } from "./actions";
+import {
+  fetchCategoriesSuccess,
+  fetchCategoriesFailed,
+} from "./category-actions";
 
 export function* fetchCategoriesAsync() {
   try {

@@ -1,23 +1,26 @@
 import { createSelector } from "reselect";
+import { initialState, categoryMap } from "./category-types";
+import { rootState } from "../store";
 /**
  * reducer method is going to goes through single item inside of an array,
  * and manipulate it according to our wishes
  */
-const selectCategoriesReducer = (state) => state.categories;
+const selectCategoriesReducer = (state: rootState): initialState =>
+  state.categories;
 
 const selectCategories = createSelector(
   [selectCategoriesReducer],
   (categories) => categories.categories
 );
 
-export const categoriesSelector = createSelector(
+export const selectCategoriesMap = createSelector(
   [selectCategories],
-  (categories) =>
-    categories.reduce((accumelator, category) => {
+  (categories): categoryMap =>
+    categories.reduce((acc, category) => {
       const { title, items } = category;
-      accumelator[title.toLowerCase()] = items;
-      return accumelator;
-    }, {})
+      acc[title.toLowerCase()] = items;
+      return acc;
+    }, {} as categoryMap)
 );
 
 export const selectCategoriesIsLoading = createSelector(

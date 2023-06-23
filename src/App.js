@@ -11,10 +11,9 @@ import { checkUserSession } from "./store/user/user-actions";
 
 const App = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(checkUserSession());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Routes>

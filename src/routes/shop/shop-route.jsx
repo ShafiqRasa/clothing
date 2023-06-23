@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import CategoriesPreview from "../../components/categories-preview/categories-preview.component";
 import Category from "../category/category.route";
 import { useDispatch } from "react-redux";
-import { fetchCategoriesStart } from "../../store/categories/actions";
+import { fetchCategoriesStart } from "../../store/categories/category-actions";
 
 const Shop = () => {
   const dispatch = useDispatch();

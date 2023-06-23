@@ -10,6 +10,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  User,
+  NextOrObserver,
 } from "firebase/auth";
 
 // in order to use another firebase service(firestore), you need to import the required methods
@@ -22,6 +24,7 @@ import {
   writeBatch,
   getDocs,
   query,
+  QueryDocumentSnapshot,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -44,7 +47,7 @@ provider.setCustomParameters({
   prompt: "select_account",
 });
 
-export const auth = new getAuth();
+export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 /************ End ***************/
 
@@ -53,11 +56,24 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
  *    after checking if the authenticated user is exsit in our database or not,
  *    if not, store the user to the database using setDoc
  *  */
+export type additionalInfoType = {
+  displayName?: string;
+};
+export type userType = {
+  createdAt: Date;
+  displayName: string;
+  email: string;
+};
 export const db = getFirestore();
+type ObjectToAdd = {
+  title: string;
+};
+
 export const createUserDocumentFromAuth = async (
-  userAuth,
-  additionalInfo = {}
-) => {
+  userAuth: User,
+  additionalInfo = {} as additionalInfoType
+): Promise<void | QueryDocumentSnapshot<userType>> => {
+  if (!userAuth) return;
   const { uid, displayName, email } = userAuth;
   const userDocRef = doc(db, "users", uid);
   const userDocSnappShot = await getDoc(userDocRef);
@@ -77,19 +93,25 @@ export const createUserDocumentFromAuth = async (
       console.log("error while creating user to the database", error);
     }
   }
-  return userDocSnappShot;
+  return userDocSnappShot as QueryDocumentSnapshot<userType>;
 };
 /************ End ***************/
 
 // sign-up form api called, createUserWithEmailAndPassword
-export const createAuthUserWithEmailAndPassword = async (email, password) => {
+export const createAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string
+) => {
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 /************ End ***************/
 
 // sign-in form api call, signInWithEmailAndPassword
-export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+export const signInAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string
+) => {
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
@@ -102,11 +124,8 @@ export const userSignOut = async () => signOut(auth);
  * in order to treger signing in and signing out of the user effeciently.
  * Firebase provides a really helpful listner to keep traking of user authenitcation called OBSERVER PATTERN(onAuthStateChanged!)
  **/
-export const onAuthStateChangedListner = (
-  callback,
-  errorCallback,
-  completeCallback
-) => onAuthStateChanged(auth, callback, errorCallback, completeCallback);
+export const onAuthStateChangedListner = (callback: NextOrObserver<User>) =>
+  onAuthStateChanged(auth, callback);
 
 /**
  * OBSERVER PATTERN callbacks, we can track based on especific callback and do the right thing,
@@ -123,13 +142,16 @@ export const onAuthStateChangedListner = (
  * @param {*} collectionKey is the name of callection which is gonna suppose to write inside
  * @param {*} data is the data suppose to be stored to that collection
  */
-export const writeDataToDB = async (collectionKey, data, field) => {
+export const writeDataToDB = async <T extends ObjectToAdd>(
+  collectionKey: string,
+  data: T[]
+) => {
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
 
-  data.forEach((item) => {
-    const docRef = doc(collectionRef, item[field].title.toLowerCase());
-    batch.set(docRef, item);
+  data.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
   });
   await batch.commit();
   console.log("data has been uploaded successfully!");
@@ -141,17 +163,32 @@ export const writeDataToDB = async (collectionKey, data, field) => {
  * @param {*} collectionKey is the specific collectionName which we want to fetch data from.
  * @returns
  */
-export const getDataFromDB = async (collectionKey) => {
+type CategoryItem = {
+  id: number;
+  imageUrl: string;
+  name: string;
+  price: number;
+};
+type CategoryData = {
+  imageUrl: string;
+  items: CategoryItem[];
+  title: string;
+};
+export const getDataFromDB = async (
+  collectionKey: string
+): Promise<CategoryData[]> => {
   const collectionRef = collection(db, collectionKey); // point out to the collection
   const q = query(collectionRef); // with the collectionRef, now have access to the query instance
 
   const querySnapshot = await getDocs(q); // with the query instance, now have access to the querySnapshot using getDocs method
-  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+  return querySnapshot.docs.map(
+    (docSnapshot) => docSnapshot.data() as CategoryData
+  );
 };
 /************ End ***************/
 
 /** trying to change all async actions to the saga */
-export const getCurrentUser = () => {
+export const getCurrentUser = (): Promise<User | null> => {
   return new Promise((resolve, reject) => {
     const unsubscribe = onAuthStateChanged(
       auth,
