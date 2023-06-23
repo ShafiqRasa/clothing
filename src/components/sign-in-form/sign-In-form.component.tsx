@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import Input from "../form-input/form-input.component";
 import { SignInContainer } from "./sign-in-form.style";
 import { BUTTON_TYPES } from "../genral-button/genral-button.component";
@@ -18,32 +18,22 @@ const SignInForm = () => {
   const dispatch = useDispatch();
 
   const resetFormField = () => setFormField(fields);
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormField({ ...formField, [name]: value });
   };
 
   const SignInWithGoogle = async () => dispatch(googleSignInStart());
 
-  const onSubmit = async (event) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { email, password } = formField;
 
     try {
       dispatch(emailSignInStart(email, password));
       resetFormField();
-    } catch ({ code }) {
-      switch (code) {
-        case "auth/wrong-password":
-          alert("Wrong credintials, password not exist!");
-          break;
-        case "auth/user-not-found":
-          alert("User not found, please try agian!");
-          break;
-        default:
-          console.log(code);
-          break;
-      }
+    } catch (error) {
+      console.log(error);
     }
   };
   return (

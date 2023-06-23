@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
+import { AuthError, AuthErrorCodes } from "firebase/auth";
 import Input from "../form-input/form-input.component";
 import Button from "../genral-button/genral-button.component";
 import { signUpStart } from "../../store/user/user-actions";
 import { useDispatch } from "react-redux";
+import { BUTTON_TYPES } from "../genral-button/genral-button.component";
 
 const fields = {
   displayName: "",
@@ -14,14 +16,14 @@ const SignUpForm = () => {
   const [formField, setFormField] = useState(fields);
   const dispatch = useDispatch();
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormField({ ...formField, [name]: value });
   };
   const resetFormField = () => {
     setFormField(fields);
   };
-  const onSubmit = (event) => {
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { displayName, email, password, confirmPassword } = formField;
     if (password !== confirmPassword) {
@@ -31,17 +33,11 @@ const SignUpForm = () => {
     try {
       dispatch(signUpStart({ displayName, email, password }));
       resetFormField();
-    } catch ({ code }) {
-      switch (code) {
-        case "auth/weak-password":
-          alert("Weak Password, please make it strong!");
-          break;
-        case "auth/email-already-in-use":
-          alert("Can not create user, Email is already in use!");
-          break;
-        default:
-          console.log(code);
-          break;
+    } catch (error) {
+      if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
+        alert("Cannot create user, email already in use");
+      } else {
+        console.log("user creation encountered an error", error);
       }
     }
   };
@@ -83,7 +79,7 @@ const SignUpForm = () => {
           value={formField.confirmPassword}
           required
         />
-        <Button btnType="inverted" type="submit">
+        <Button btnType={BUTTON_TYPES.inverted} type="submit">
           Sign up
         </Button>
       </form>
