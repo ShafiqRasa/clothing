@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Button from "../genral-button/Button";
+import Button from "../genral-button/genral-button.component";
 
 export const BackgroundImage = styled.div`
   width: 100%;

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Input from "../form-input";
-import Button from "../genral-button/Button";
-import { signUpStart } from "../../store/user/actions";
+import Input from "../form-input/form-input.component";
+import Button from "../genral-button/genral-button.component";
+import { signUpStart } from "../../store/user/user-actions";
 import { useDispatch } from "react-redux";
 
 const fields = {

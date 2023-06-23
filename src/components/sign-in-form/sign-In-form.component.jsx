@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import Input from "../form-input";
-import Button from "../genral-button";
+import Input from "../form-input/form-input.component";
 import { SignInContainer } from "./sign-in-form.style";
-import { BUTTON_TYPES } from "../genral-button/Button";
+import { BUTTON_TYPES } from "../genral-button/genral-button.component";
+import Button from "../genral-button/genral-button.component";
 import { useDispatch } from "react-redux";
-import { googleSignInStart, emailSignInStart } from "../../store/user/actions";
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../store/user/user-actions";
 
 const fields = {
   email: "",

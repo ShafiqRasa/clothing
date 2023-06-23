@@ -1,5 +1,5 @@
-import { BUTTON_TYPES } from "../genral-button/Button";
-import { addItemToCart } from "../../store/cart/actions";
+import BUTTON_TYPES from "../genral-button/genral-button.component";
+import { addItemToCart } from "../../store/cart/cat-actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { cartSelector } from "../../store/cart/cart-selector";

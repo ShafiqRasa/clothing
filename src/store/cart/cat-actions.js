@@ -1,4 +1,4 @@
-import { CART_ACTION_TYPES } from "./types";
+import { CART_ACTION_TYPES } from "./cart-types";
 import { CreateAction } from "../../utils/reducer";
 
 export const setIsOpen = () => CreateAction(CART_ACTION_TYPES.SET_IS_OPEN);

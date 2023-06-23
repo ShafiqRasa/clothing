@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { ReactComponent as CrownLogo } from "../../assets/icons/crown.svg";
-import CartIcon from "../../components/cart-icon";
-import CartDropdown from "../../components/cart-dropdown";
+import CartIcon from "../../components/cart-icon/cart-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import { useSelector } from "react-redux";
 import { cartSelector } from "../../store/cart/cart-selector";
 import { selectCurrentUser } from "../../store/user/user-selector";
@@ -12,7 +12,7 @@ import {
   NavLinkContainer,
   NavLink,
 } from "./navigation.styles";
-import { signOutUser } from "../../store/user/actions";
+import { signOutUser } from "../../store/user/user-actions";
 import { useDispatch } from "react-redux";
 
 const Navigation = () => {

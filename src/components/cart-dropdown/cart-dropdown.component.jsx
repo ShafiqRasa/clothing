@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import Button from "../genral-button";
+import Button from "../genral-button/genral-button.component";
 import {
   CartDropdownContainer,
   CartItems,
   EmptyMessage,
 } from "./cart-dropdown.style";
-import CartItem from "../cart-item";
+import CartItem from "../cart-item/cart-item.component";
 import { useSelector } from "react-redux";
 import { cartSelector } from "../../store/cart/cart-selector";
 

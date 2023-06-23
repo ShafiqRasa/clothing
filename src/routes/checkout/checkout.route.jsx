@@ -1,4 +1,4 @@
-import CheckoutItem from "../../components/checkout-item/CheckoutItem";
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import { useSelector } from "react-redux";
 import { cartSelector } from "../../store/cart/cart-selector";
 import {

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import CategoriesPreview from "../../components/categories-preview";
-import Category from "../category/Category";
+import CategoriesPreview from "../../components/categories-preview/categories-preview.component";
+import Category from "../category/category.route";
 import { useDispatch } from "react-redux";
 import { fetchCategoriesStart } from "../../store/categories/actions";
 

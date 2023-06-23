@@ -1,5 +1,5 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
-import { USER_ACTION_TYPES } from "./types";
+import { USER_ACTION_TYPES } from "./user-types";
 import { getCurrentUser } from "../../utils/firebase/firebase-api.config";
 
 import {
@@ -9,7 +9,7 @@ import {
   signUpFiled,
   signOutSuccess,
   signOutFieled,
-} from "./actions";
+} from "./user-actions";
 
 import {
   createUserDocumentFromAuth,
