@@ -1,4 +1,4 @@
-import BUTTON_TYPES from "../genral-button/genral-button.component";
+import { BUTTON_TYPES } from "../genral-button/genral-button.component";
 import { addItemToCart } from "../../store/cart/cart-actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -9,8 +9,13 @@ import {
   BackgroundImage,
   EnhancedButton,
 } from "./product.style";
+import { cartItem } from "../../store/cart/cart-types";
+import { CategoryItem } from "../../store/categories/category-types";
 
-const Product = ({ product }) => {
+type productProps = {
+  product: CategoryItem;
+};
+const Product = ({ product }: productProps) => {
   const { cartItems } = useSelector(cartSelector);
   const dispatch = useDispatch();
   const { name, price, imageUrl } = product;
@@ -31,5 +36,4 @@ const Product = ({ product }) => {
     </CategoryCartContainer>
   );
 };
-
 export default Product;

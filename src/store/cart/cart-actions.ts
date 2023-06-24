@@ -97,7 +97,7 @@ const directRemoveItem = (
 
 export const addItemToCart = (
   cartItems: cartItem[],
-  productToAdd: cartItem
+  productToAdd: CategoryItem
 ) => {
   const newCartItems = addItem(cartItems, productToAdd);
   return updateCartItemReducer(newCartItems);

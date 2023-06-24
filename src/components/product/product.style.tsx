@@ -8,7 +8,8 @@ export const BackgroundImage = styled.div`
   background-position: center;
   margin-bottom: 5px;
   background-size: cover;
-  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+  background-image: ${({ imageUrl }: { imageUrl: string }) =>
+    `url(${imageUrl})`};
 `;
 export const Footer = styled.div`
   width: 100%;

@@ -1,8 +1,15 @@
-import React from "react";
 import Item from "../directory-item/dicrectory-item.component";
 import { CategoriesListContainer } from "./categories-list.style";
-
-const Categories = ({ categories }) => {
+export type categoryProps = {
+  id: number;
+  title: string;
+  route: string;
+  imageUrl: string;
+};
+export type categoriesProps = {
+  categories: categoryProps[];
+};
+const Categories = ({ categories }: categoriesProps) => {
   return (
     <CategoriesListContainer>
       {categories.map((category) => (

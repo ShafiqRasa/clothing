@@ -16,8 +16,12 @@ import {
   removeItemFromCart,
   directRemoveItemFromCart,
 } from "../../store/cart/cart-actions";
+import { cartItem } from "../../store/cart/cart-types";
 
-const CheckoutItem = ({ cartItem }) => {
+type checkoutItemProps = {
+  cartItem: cartItem;
+};
+const CheckoutItem = ({ cartItem }: checkoutItemProps) => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector(cartSelector);
   const { name, imageUrl, price, quantity } = cartItem;

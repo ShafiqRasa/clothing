@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 // in order to use firebase service(authentication), you need to import the required methods
 import {
   getAuth,
-  signInWithRedirect,
+  // signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,

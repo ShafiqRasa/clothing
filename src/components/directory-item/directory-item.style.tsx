@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const BackgroundImage = styled.div`
@@ -10,7 +9,8 @@ export const BackgroundImage = styled.div`
   one more cool styled-components feature!
   we can pass props same as normal components to the styles components using below syntax
   */
-  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+  background-image: ${({ imageUrl }: { imageUrl: string }) =>
+    `url(${imageUrl})`};
 `;
 
 export const Body = styled.div`

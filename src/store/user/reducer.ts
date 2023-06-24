@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { USER_ACTION_TYPES, initialState } from "./user-types";
+import { initialState } from "./user-types";
 import {
   signInSuccess,
   signOutSuccess,
