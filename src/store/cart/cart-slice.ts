@@ -19,7 +19,7 @@ const initialState: initialStateType = {
 
 const addItem = (cartItems: cartItemType[], productToAdd: cartItemType) => {
   // find if cartItems contains productToAdd
-  const itemExist = cartItems.find((item) => item.id == productToAdd.id);
+  const itemExist = cartItems.find((item) => item.id === productToAdd.id);
 
   // if product is found, then increment the quantity
   if (itemExist) {
@@ -41,12 +41,14 @@ const removeItem = (
   cartItemToRemove: cartItemType
 ) => {
   // find if cartItems contains cartItemToRemove
-  const itemExist = cartItems.find((item) => item.id == cartItemToRemove.id);
+  const itemExist = cartItems.find((item) => item.id === cartItemToRemove.id);
 
   // check if quantity is equal to 1, then remove that item from the cart
   if (itemExist) {
-    if (itemExist.quantity == 1) {
-      return cartItems.filter((cartItem) => cartItem.id != cartItemToRemove.id);
+    if (itemExist.quantity === 1) {
+      return cartItems.filter(
+        (cartItem) => cartItem.id !== cartItemToRemove.id
+      );
     }
   }
 
@@ -64,7 +66,7 @@ const removeItem = (
 const directRemoveItem = (
   cartItems: cartItemType[],
   cartItemToRemove: cartItemType
-) => cartItems.filter((cartItem) => cartItem.id != cartItemToRemove.id);
+) => cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
 
 export const cartSlice = createSlice({
   name: "cart",

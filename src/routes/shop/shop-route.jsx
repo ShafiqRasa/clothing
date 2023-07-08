@@ -14,7 +14,7 @@ const Shop = () => {
       dispatch(setCategories(categories));
     };
     return getData;
-  }, []);
+  }, [dispatch]);
   return (
     <Routes>
       <Route index element={<CategoriesPreview />} />

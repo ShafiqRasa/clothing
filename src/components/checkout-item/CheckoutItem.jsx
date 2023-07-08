@@ -1,6 +1,4 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { cartSelector } from "../../store/cart/cart-selector";
+import { useDispatch } from "react-redux";
 import {
   CheckoutItemContainer,
   ImageContainer,
@@ -19,7 +17,6 @@ import {
 
 const CheckoutItem = ({ cartItem }) => {
   const dispatch = useDispatch();
-  const { cartItems } = useSelector(cartSelector);
   const { name, imageUrl, price, quantity } = cartItem;
 
   const incrementItem = () => dispatch(addItemToCart(cartItem));

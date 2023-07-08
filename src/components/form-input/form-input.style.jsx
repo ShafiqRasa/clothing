@@ -54,7 +54,7 @@ export const FormInput = styled.input`
       here we are gonna simply check the props and return the desired style block.
    */
   ${({ type }) => {
-    if (type == "password") {
+    if (type === "password") {
       return PasswordStyle;
     }
   }}
