@@ -11,16 +11,22 @@ import {
   createUserDocumentFromAuth,
   getDataFromDB,
 } from "./utils/firebase/firebase-api.config";
-import { setCurrentUser } from "./store/user/actions";
+import { setCurrentUser } from "./store/user/user-slice";
 import { useDispatch } from "react-redux";
-import { setCategories } from "./store/categories/actions";
+import { setCategories } from "./store/categories/categories-slice";
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListner((user) => {
       user && createUserDocumentFromAuth(user);
-      dispatch(setCurrentUser(user));
+      const pickedUser =
+        user &&
+        (({ accessToken, email }) => ({
+          accessToken,
+          email,
+        }))(user);
+      dispatch(setCurrentUser(pickedUser));
     });
     return unsubscribe;
   }, []);

@@ -15,17 +15,16 @@ import {
   addItemToCart,
   removeItemFromCart,
   directRemoveItemFromCart,
-} from "../../store/cart/actions";
+} from "../../store/cart/cart-slice";
 
 const CheckoutItem = ({ cartItem }) => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector(cartSelector);
   const { name, imageUrl, price, quantity } = cartItem;
 
-  const incrementItem = () => dispatch(addItemToCart(cartItems, cartItem));
-  const decrementItem = () => dispatch(removeItemFromCart(cartItems, cartItem));
-  const removeItem = () =>
-    dispatch(directRemoveItemFromCart(cartItems, cartItem));
+  const incrementItem = () => dispatch(addItemToCart(cartItem));
+  const decrementItem = () => dispatch(removeItemFromCart(cartItem));
+  const removeItem = () => dispatch(directRemoveItemFromCart(cartItem));
   return (
     <CheckoutItemContainer>
       <ImageContainer>

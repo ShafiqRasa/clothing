@@ -1,8 +1,6 @@
 import { BUTTON_TYPES } from "../genral-button/Button";
-import { addItemToCart } from "../../store/cart/actions";
+import { addItemToCart } from "../../store/cart/cart-slice";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { cartSelector } from "../../store/cart/cart-selector";
 import {
   CategoryCartContainer,
   Footer,
@@ -11,10 +9,9 @@ import {
 } from "./product.style";
 
 const Product = ({ product }) => {
-  const { cartItems } = useSelector(cartSelector);
   const dispatch = useDispatch();
   const { name, price, imageUrl } = product;
-  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
+  const addProductToCart = () => dispatch(addItemToCart(product));
   return (
     <CategoryCartContainer>
       <BackgroundImage imageUrl={imageUrl} />
