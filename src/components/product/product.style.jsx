@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import Button from "../genral-button/Button";
+import Button from "../genral-button/genral-button.component";
 
 export const BackgroundImage = styled.div`
   width: 100%;
   height: 95%;
-  object-fit: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   margin-bottom: 5px;
+  background-size: cover;
   background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 `;
 export const Footer = styled.div`

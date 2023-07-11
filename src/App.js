@@ -1,12 +1,21 @@
+import { useEffect } from "react";
 import "./categories.style.scss";
 import { Routes, Route } from "react-router-dom";
-import Home from "./routes/home";
-import Shop from "./routes/shop";
-import Navigation from "./routes/navigation";
-import Authentication from "./routes/authentication";
-import Checkout from "./routes/checkout";
+import Home from "./routes/home/home.route";
+import Shop from "./routes/shop/shop-route";
+import Navigation from "./routes/navigation/navigation.route";
+import Authentication from "./routes/authentication/authentication.route";
+import Checkout from "./routes/checkout/checkout.route";
+import { useDispatch } from "react-redux";
+import { checkUserSession } from "./store/user/user-actions";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkUserSession());
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
