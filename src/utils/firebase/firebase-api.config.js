@@ -3,7 +3,6 @@ import { initializeApp } from "firebase/app";
 // in order to use firebase service(authentication), you need to import the required methods
 import {
   getAuth,
-  signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -34,7 +33,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 /**
  * 1. create provider and auth, to pass to the signInWithPopup firestore service to do user authentication using google account
