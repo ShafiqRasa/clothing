@@ -50,8 +50,8 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 /**
  * 2. using getFirestore, actually we pointting to the database which we have just created inside firestore!
- * after checking if the authenticated user is exsit in our database or not,
- * if not, store the user to the database using setDoc
+ *    after checking if the authenticated user is exsit in our database or not,
+ *    if not, store the user to the database using setDoc
  *  */
 export const db = getFirestore();
 export const createUserDocumentFromAuth = async (
@@ -69,12 +69,15 @@ export const createUserDocumentFromAuth = async (
         email,
         createdAt,
         ...additionalInfo,
+        // why we passed additionalInfo object,
+        // because maybe sometimes the user which is authenticated with google account has not displayName,
+        // however the authenticated user using email and password always has! check the flow from sign up form...
       });
     } catch (error) {
       console.log("error while creating user to the database", error);
     }
   }
-  return userDocRef;
+  return userDocSnappShot;
 };
 /************ End ***************/
 
@@ -143,11 +146,20 @@ export const getDataFromDB = async (collectionKey) => {
   const q = query(collectionRef); // with the collectionRef, now have access to the query instance
 
   const querySnapshot = await getDocs(q); // with the query instance, now have access to the querySnapshot using getDocs method
-  const data = querySnapshot.docs.reduce((accumelator, currentItem) => {
-    const { title, items } = currentItem.data();
-    accumelator[title.toLowerCase()] = items;
-    return accumelator;
-  }, {});
-  return data;
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
 /************ End ***************/
+
+/** trying to change all async actions to the saga */
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};
