@@ -1,6 +1,6 @@
 import SignUpForm from "../../components/sign-up-form";
 import SignInForm from "../../components/sign-in-form";
-import { AuthenticationContainer } from "./authentication.style";
+import { AuthenticationContainer } from "./authentication-route.style";
 
 const Authentication = () => {
   return (

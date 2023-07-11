@@ -12,7 +12,7 @@ import {
   LogoConainer,
   NavLinkContainer,
   NavLink,
-} from "./navigation.styles";
+} from "./navigation-route.styles";
 
 // const navs = [
 //   {

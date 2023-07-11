@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import "./categories.style.scss";
 import { Routes, Route } from "react-router-dom";
-import Home from "./routes/home";
+import Home from "./routes/home/home-route";
 import Shop from "./routes/shop/shop-route";
-import Navigation from "./routes/navigation";
-import Authentication from "./routes/authentication";
-import Checkout from "./routes/checkout";
+import Navigation from "./routes/navigation/navigation-route";
+import Authentication from "./routes/authentication/authentication-route";
+import Checkout from "./routes/checkout/checkout-route";
 import {
   onAuthStateChangedListner,
   createUserDocumentFromAuth,

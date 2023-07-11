@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment } from "react";
 import { useParams } from "react-router-dom";
-import { CategoryContainer, CategoryTitle } from "./category.style";
+import { CategoryContainer, CategoryTitle } from "./category-route.style";
 import Product from "../../components/product";
 import { useSelector } from "react-redux";
 import { categoriesSelector } from "../../store/categories/categories-selector";
