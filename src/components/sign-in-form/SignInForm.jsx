@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Input from "../form-input";
-import Button from "../genral-button";
+import Button from "../genral-button/genral-button.component";
 import { SignInContainer } from "./sign-in-form.style";
 import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase-api.config";
-import { BUTTON_TYPES } from "../genral-button/Button";
+import { BUTTON_TYPES } from "../genral-button/genral-button.component";
 
 const fields = {
   email: "",

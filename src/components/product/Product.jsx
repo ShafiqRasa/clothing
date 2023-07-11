@@ -1,4 +1,4 @@
-import { BUTTON_TYPES } from "../genral-button/Button";
+import { BUTTON_TYPES } from "../genral-button/genral-button.component";
 import { addItemToCart } from "../../store/cart/actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";

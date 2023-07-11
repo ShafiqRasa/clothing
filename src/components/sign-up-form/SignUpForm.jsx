@@ -4,7 +4,7 @@ import {
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase-api.config";
 import Input from "../form-input";
-import Button from "../genral-button/Button";
+import Button from "../genral-button/genral-button.component";
 
 const fields = {
   displayName: "",

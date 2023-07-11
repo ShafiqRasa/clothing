@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Button from "../genral-button";
+import Button from "../genral-button/genral-button.component";
 import {
   CartDropdownContainer,
   CartItems,
