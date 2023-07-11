@@ -30,7 +30,7 @@ const updateCartItemReducer = (cartItems) => {
 };
 const addItem = (cartItems, productToAdd) => {
   // find if cartItems contains productToAdd
-  const itemExist = cartItems.find((item) => item.id == productToAdd.id);
+  const itemExist = cartItems.find((item) => item.id === productToAdd.id);
 
   // if product is found, then increment the quantity
   if (itemExist) {
@@ -49,11 +49,11 @@ const addItem = (cartItems, productToAdd) => {
 
 const removeItem = (cartItems, cartItemToRemove) => {
   // find if cartItems contains cartItemToRemove
-  const itemExist = cartItems.find((item) => item.id == cartItemToRemove.id);
+  const itemExist = cartItems.find((item) => item.id === cartItemToRemove.id);
 
   // check if quantity is equal to 1, then remove that item from the cart
-  if (itemExist.quantity == 1)
-    return cartItems.filter((cartItem) => cartItem.id != cartItemToRemove.id);
+  if (itemExist.quantity === 1)
+    return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
 
   // return back the cartItem with the reduced quantity
   return cartItems.map((cartItem) =>
@@ -66,7 +66,7 @@ const removeItem = (cartItems, cartItemToRemove) => {
   );
 };
 const directRemoveItem = (cartItems, cartItemToRemove) =>
-  cartItems.filter((cartItem) => cartItem.id != cartItemToRemove.id);
+  cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
 
 export const addItemToCart = (cartItems, productToAdd) => {
   const newCartItems = addItem(cartItems, productToAdd);
