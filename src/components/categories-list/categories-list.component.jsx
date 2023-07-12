@@ -1,5 +1,5 @@
 import React from "react";
-import Item from "../directory-item";
+import Item from "../directory-item/directory-item.component";
 import { CategoriesListContainer } from "./categories-list.style";
 
 const Categories = ({ categories }) => {

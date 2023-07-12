@@ -9,9 +9,9 @@ import { cartSelector } from "../../store/cart/cart-selector";
 import { selectCurrentUser } from "../../store/user/user-selector";
 import {
   NavigationContainer,
-  LogoConainer,
-  NavLinkContainer,
+  NavLinks,
   NavLink,
+  LogoContainer,
 } from "./navigation-route.styles";
 
 // const navs = [
@@ -35,21 +35,21 @@ const Navigation = () => {
   return (
     <Fragment>
       <NavigationContainer>
-        <LogoConainer to="/">
-          <CrownLogo />
-        </LogoConainer>
-        <NavLinkContainer>
-          <NavLink to="/shop">Shop</NavLink>
+        <LogoContainer to="/">
+          <CrownLogo className="logo" />
+        </LogoContainer>
+        <NavLinks>
+          <NavLink to="/shop">SHOP</NavLink>
 
           {currentUser ? (
             <NavLink as="span" onClick={handleUserSignOut}>
-              Sign out
+              SIGN OUT
             </NavLink>
           ) : (
-            <NavLink to="/auth">Sign In</NavLink>
+            <NavLink to="/auth">SIGN IN</NavLink>
           )}
           <CartIcon />
-        </NavLinkContainer>
+        </NavLinks>
         {isOpen && <CartDropdown />}
       </NavigationContainer>
       <Outlet />

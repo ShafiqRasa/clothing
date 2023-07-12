@@ -25,6 +25,9 @@ export const Footer = styled.div`
   & .price {
     width: 10%;
   }
+  @media screen and (max-width: 800px) {
+    height: 10%;
+  }
 `;
 export const EnhancedButton = styled(Button)`
   width: 80%;
@@ -32,6 +35,10 @@ export const EnhancedButton = styled(Button)`
   position: absolute;
   top: 255px;
   display: none;
+  @media screen and (max-width: 800px) {
+    top: 150px;
+    padding: 0;
+  }
 `;
 
 export const CategoryCartContainer = styled.div`

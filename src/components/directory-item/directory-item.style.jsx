@@ -23,6 +23,9 @@ export const Body = styled.div`
   background-color: white;
   opacity: 0.7;
   position: absolute;
+  @media screen and (max-width: 800px) {
+    padding: 0 10px;
+  }
 `;
 
 export const DirectoryItemContainer = styled.div`
@@ -69,5 +72,8 @@ export const DirectoryItemContainer = styled.div`
 
   &:last-child {
     margin-left: 7.5px;
+  }
+  @media screen and (max-width: 800px) {
+    height: 200px;
   }
 `;

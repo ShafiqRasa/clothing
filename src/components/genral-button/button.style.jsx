@@ -45,6 +45,9 @@ export const Inverted = styled(BaseBtn)`
     color: white;
     border: none;
   }
+  @media screen and (max-width: 800px) {
+    padding: 0;
+  }
 `;
 
 export const ButtonSpinner = styled(SpinnerContainer)`

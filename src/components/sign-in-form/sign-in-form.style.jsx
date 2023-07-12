@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SignInContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: (2, 1fr);
   gap: 1rem;
-  justify-content: space-between;
 `;
