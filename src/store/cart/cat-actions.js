@@ -30,10 +30,12 @@ const updateCartItemReducer = (cartItems) => {
 };
 const addItem = (cartItems, productToAdd) => {
   // find if cartItems contains productToAdd
-  const itemExist = cartItems.find((item) => item.id === productToAdd.id);
+
+  const itemExist =
+    cartItems && cartItems.find((item) => item.id === productToAdd.id);
 
   // if product is found, then increment the quantity
-  if (itemExist) {
+  if (cartItems && itemExist) {
     return cartItems.map((cartItem) =>
       cartItem.id === productToAdd.id
         ? {

@@ -13,13 +13,14 @@ const CartDropdown = () => {
   const { cartItems } = useSelector(cartSelector);
   const navigate = useNavigate();
   const goToCheckout = () => navigate("/checkout");
+
   return (
     <CartDropdownContainer>
       <CartItems>
-        {cartItems ? (
+        {cartItems.length > 0 ? (
           cartItems?.map(({ id, ...item }) => <CartItem key={id} {...item} />)
         ) : (
-          <EmptyMessage>Cart is empty!</EmptyMessage>
+          <EmptyMessage>Your cart is empty!</EmptyMessage>
         )}
       </CartItems>
       <Button onClick={goToCheckout}>Go To Checkout</Button>

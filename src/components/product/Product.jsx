@@ -15,9 +15,7 @@ const Product = ({ product }) => {
   const dispatch = useDispatch();
   const { name, price, imageUrl } = product;
 
-  const addProductToCart = () => {
-    dispatch(addItemToCart(cartItems, product));
-  };
+  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
   return (
     <CategoryCartContainer>
       <BackgroundImage imageUrl={imageUrl} />
