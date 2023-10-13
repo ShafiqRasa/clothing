@@ -13,6 +13,7 @@ const CartIcon = () => {
   const handleShopping = () => {
     dispatch(setIsOpen());
   };
+
   return (
     <CartIconContainer onClick={handleShopping}>
       <ShoppingIconContainer />
